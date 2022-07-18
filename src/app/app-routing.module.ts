@@ -1,7 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllCharactersComponent } from './all-characters/all-characters.component';
 
-const routes: Routes = [];
+import { ComicsComponent } from './comics/comics.component';
+import { CreatorsComponent } from './creators/creators.component';
+import { SeriesComponent } from './series/series.component';
+import { StoriesComponent } from './stories/stories.component';
+
+const routes: Routes = [
+
+  { path:'', component:AllCharactersComponent},
+  { path:'comics', component:ComicsComponent},
+  { path:'creators', component:CreatorsComponent},
+  { path:'series', component:SeriesComponent},
+  { path:'stories', component:StoriesComponent}
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
