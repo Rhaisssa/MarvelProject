@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MarvelAPIService } from '../Service/marvel-api.service';
 
 @Component({
   selector: 'app-series',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeriesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:MarvelAPIService) { }
+
+  series:any=[];
 
   ngOnInit(): void {
+
+    this.service.GetAllSeries().subscribe((result)=>{
+      console.log(result);
+      this.series = result.data.results;
+    })
   }
 
 }

@@ -1,1 +1,20 @@
-<p>series works!</p>
+<div class="container-fluid mt-5">
+  <h4>Marvel Series</h4>
+  <div class="row">
+    <div class="col-lg-3 mt-3 mb-3" *ngFor="let s of series">
+      <div class="card">
+        <img
+          src="{{
+            s.thumbnail.path + '/standard_medium.' + s.thumbnail.extension
+          }}"
+          width="100%"
+          class="card-img-top"
+          alt="Some Issue Loading Image..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ s.title }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

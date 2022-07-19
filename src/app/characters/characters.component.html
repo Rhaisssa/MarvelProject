@@ -4,14 +4,14 @@
 <div class="row">
   <div
     class="col-lg-3 mt-3 mb-3"
-    *ngFor="let characters of Characters"
+    *ngFor="let characters of characters"
   >
     <div class="card">
       <img src="{{characters.thumbnail.path +'/standard_medium.'+characters.thumbnail.extension}}" width="100%" class="card-img-top" alt="Some Issue Loading Image..." />
       <div class="card-body">
         <h5 class="card-title">{{ characters.name }}</h5>
         <button type="button" (click)="GetComicsByCharacter(characters.id)" class="btn btn-outline-primary  mr-4" data-toggle="modal" data-target=".bd-example-modal-lg">Comics</button>
-        <!--<button type="button" (click)="fetchSeriesByCharacter(characters.id)" class="btn btn-outline-secondary" data-toggle="modal" data-target=".cd-example-modal-lg">Series</button>-->
+      <!-----  <button type="button" (click)="GetSeriesByCharacter(characters.id)" class="btn btn-outline-secondary" data-toggle="modal" data-target=".cd-example-modal-lg">Series</button>--->
 
       </div>
     </div>
