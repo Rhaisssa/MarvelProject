@@ -11,6 +11,13 @@
         placeholder="Search"
         aria-label="Search"
         (keyup)="GetCharacterBySeriesId($event)"
+        type="number"
+        required
+        name="charactersCharacterId"
+        id="charactersCharacterId"
+        placeholder="Search"
+        aria-label="Search"
+        (keyup)="GetCharacterByCharacterId($event)"
       />
     </div>
     <div class="col-lg-3"></div>
@@ -19,7 +26,7 @@
 
 <!--------------------------------------------------------------------------->
 
-<div class="container-fluid mt-5" *ngIf="!showSearchResult">
+<div class="container-fluid mt-5" *ngIf="!showSearchResultCharacter">
   <h4>Marvel Characters</h4>
   <div class="row">
     <div class="col-lg-3 mt-3 mb-3" *ngFor="let characters of characters">
@@ -34,31 +41,37 @@
           class="card-img-top"
           alt="We encountered a problem uploading your image..."
         />
-        <!-----
-        <div class="card-body">
-          <h5 class="card-title">{{ characters.name }}</h5>
-          <button
-            type="button"
-            (click)="GetComicsByCharacter(characters.id)"
-            class="btn btn-outline-primary mr-4"
-            data-toggle="modal"
-            data-target=".bd-example-modal-lg"
-          >
-            Comics
-          </button>
-          <button type="button" (click)="GetSeriesByCharacter(characters.id)" class="btn btn-outline-secondary" data-toggle="modal" data-target=".cd-example-modal-lg">Series</button>--->
         <h5 class="card-title">{{ characters.name }}</h5>
-        <h6 class="card-title">{{ characters.id }}</h6>
-        <button
-          type="button"
-          (click)="GetComicsByCharacter(characters.id)"
-          class="btn btn-outline-primary mr-4"
-          data-toggle="modal"
-          data-target=".bd-example-modal-lg"
-        >
-          Comics
-        </button>
+      <!---  <h6 class="card-title">{{ characters.id }}</h6> --->
       </div>
     </div>
   </div>
 </div>
+
+<!--------------------------------------------------------------------------->
+
+<div class="container-fluid mt-5" *ngIf="showSearchResultSeries">
+  <h4>Marvel Series</h4>
+  <div class="row">
+    <div class="col-lg-3 mt-3 mb-3" *ngFor="let series of findSeries">
+      <div class="card">
+        <img
+          src="{{
+            series.thumbnail.path +
+              '/standard_medium.' +
+              series.thumbnail.extension
+          }}"
+          width="100%"
+          class="card-img-top"
+          alt="We encountered a problem uploading your image..."
+        />
+        <div class="card-body">
+        <h5 class="card-title">{{ series.name }}</h5>
+        <!---- <h6 class="card-title">{{ series.id }}</h6> ---->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
