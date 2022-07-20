@@ -7,7 +7,7 @@ import { ComicsComponent } from './comics/comics.component';
 import { SeriesComponent } from './series/series.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatorsComponent } from './creators/creators.component';
-import { StoriesComponent } from './stories/stories.component';
+
 
 @NgModule({
   declarations: [
@@ -16,14 +16,9 @@ import { StoriesComponent } from './stories/stories.component';
     ComicsComponent,
     SeriesComponent,
     CreatorsComponent,
-    StoriesComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
