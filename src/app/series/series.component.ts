@@ -20,4 +20,6 @@ export class SeriesComponent implements OnInit {
     })
   }
 
+
+
 }

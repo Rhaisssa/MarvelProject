@@ -9,6 +9,7 @@ import { StoriesComponent } from './stories/stories.component';
 
 const routes: Routes = [
 
+
   { path:'', component:CharactersComponent},
   { path:'comics', component:ComicsComponent},
   { path:'creators', component:CreatorsComponent},

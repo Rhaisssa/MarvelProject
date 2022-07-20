@@ -17,35 +17,8 @@ export class MarvelAPIService {
     return this.http.get(this.BaseUrl);
   }
 
-  GetComicsByCharacter(characterId:string):Observable<any>
-  {
-    const comicsByCharacterUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
-    return this.http.get(comicsByCharacterUrl);
-  }
 
-  GetSeriesByCharacter(characterId:string):Observable<any>
-  {
-    const seriesByCharacterUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/series?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
-    return this.http.get(seriesByCharacterUrl);
-  }
-
-  /*------------------------------------------------------*/
-
-  GetStoriesByCharacter(characterId:string):Observable<any>
-  {
-    const storiesByCharacterUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/stories?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
-    return this.http.get(storiesByCharacterUrl);
-  }
-
-  /*------------------------------------------------------*/
-
-  GetCharacterByName(characterName:string):Observable<any>
-  {
-    const characterByNameUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${characterName}&ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
-    return this.http.get(characterByNameUrl);
-  }
-
-  /*------------------------------------------------------*/
+    /*-----------------------------------------------------*/
 
   GetAllComics():Observable<any>
   {
@@ -54,16 +27,16 @@ export class MarvelAPIService {
     return this.http.get(comicsUrl);
   }
 
-  /*------------------------------------------------------
+  /*------------------------------------------------------*/
 
-  allCreators():Observable<any>
+  GetAllCreators(): Observable<any> //
   {
-    const creatorsUrl ='https://gateway.marvel.com:443/v1/public/creators?limit=10&ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64';
+    const creatorsUrl ='https://gateway.marvel.com:443/v1/public/creators?limit=20&ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64';
     ;
     return this.http.get(creatorsUrl);
   }
 
-  /*-----------------------------------------------------*/
+  /*------------------------------------------------------*/
 
   GetAllSeries():Observable<any>
   {
@@ -74,7 +47,7 @@ export class MarvelAPIService {
 
   /*-----------------------------------------------------*/
 
-  GetAllStories(): Observable<any> //
+  GetAllStories(): Observable<any>
   {
     const storiesUrl ='https://gateway.marvel.com:443/v1/public/stories?limit=20&ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64';
     ;
@@ -83,11 +56,53 @@ export class MarvelAPIService {
 
   /*-----------------------------------------------------*/
 
-  GetAllCreators(): Observable<any> //
+  GetCharacterBySeriesId(seriesId : number):Observable<any>
   {
-    const creatorsUrl ='https://gateway.marvel.com:443/v1/public/creators?limit=20&ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64';
-    ;
-    return this.http.get(creatorsUrl);
+    const characterBySeriesId = `https://gateway.marvel.com:443/v1/public/series/${seriesId}/characters?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`
+     return this.http.get(characterBySeriesId);
+
   }
+
+/*-----------------------------------------------------*/
+
+  GetComicsByCharacter(characterId:string):Observable<any>
+  {
+    const comicsByCharacterUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
+    return this.http.get(comicsByCharacterUrl);
+  }
+
+  /*------------------------------------------------------
+
+  GetCreatorsByComics(characterId:string):Observable<any>
+  {
+    const creatorsByComicsUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/series?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
+    return this.http.get(creatorsByComicsUrl);
+  }
+
+  /*------------------------------------------------------
+
+  GetSeriesByCharacterId(characterId:string):Observable<any>
+  {
+    const seriesByCharacterIdUrl = `https://gateway.marvel.com:443/v1/public/series/${characterId}/characters?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
+    return this.http.get(seriesByCharacterIdUrl);
+  }
+
+  /*------------------------------------------------------
+
+  GetStoriesByCharacter(characterId:string):Observable<any>
+  {
+    const storiesByCharacterUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/stories?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
+    return this.http.get(storiesByCharacterUrl);
+  }
+
+  /*------------------------------------------------------
+
+  GetCharacterByName(characterName:string):Observable<any>
+  {
+    const characterByNameUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${characterName}&ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;
+    return this.http.get(characterByNameUrl);
+  }
+  */
+
 
 }

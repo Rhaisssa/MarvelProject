@@ -3,32 +3,26 @@ import { MarvelAPIService } from '../Service/marvel-api.service';
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
-  styleUrls: ['./characters.component.css']
+  styleUrls: ['./characters.component.css'],
 })
 export class CharactersComponent implements OnInit {
+  constructor(private service: MarvelAPIService) {}
 
-  constructor(private service:MarvelAPIService) { }
-
-  characters: any=[];
-  findCharacter:any=[];
+  characters: any = [];
+  series: any = [];
+  stories: any = [];
+  creators: any = [];
+  comics: any = [];
+  findCharacter: any = [];
   showSearchResult: boolean = false;
-  showComicsDiv:boolean = false;
-  showSeriesDiv:boolean = false;
-  showCharacterDiv:boolean = false;
-  showCreatorsDiv:boolean = false;
-  showStoriesDiv:boolean = false;
-  characterByName: string | any;
-  series:any=[];
-  stories:any=[];
-  creators:any=[];
-  comics:any=[];
+  showComicsDiv: boolean = false;
+
+  characterBySeriesId: number | any;
+  characterSeriesId: any;
 
 
   ngOnInit(): void {
     this.showComicsDiv = false;
-    this.showSeriesDiv = false;
-    this.showCreatorsDiv = false;
-    this.showStoriesDiv = false;
     this.showSearchResult = false;
     this.service.GetAllCharacters().subscribe((result) => {
       console.log(result);
@@ -36,43 +30,36 @@ export class CharactersComponent implements OnInit {
     });
   }
 
-  GetCharacterByName(characterId:string)
-  {
-    console.log(characterId);
-    this.service.GetCharacterByName(characterId).subscribe((result)=>{
+  GetCharacterBySeriesId(event:any) {
+    this.characterSeriesId = event.target.value;
+    console.log(this.characterSeriesId);
+    this.service.GetCharacterBySeriesId(this.characterSeriesId).subscribe((result) => {
       console.log(result);
 
-      if(result.data.count>0)
-     {
-       this.showSearchResult = true;
-       this.findCharacter = result.data.results;
-     }
-     else{
-
-       this.ngOnInit();
+      if (result.data.count > 0) {
+        this.showSearchResult = true;
+        this.findCharacter = result.data.results;
+      } else {
+        this.ngOnInit();
       }
-    })
+    });
   }
 
-
-  GetComicsByCharacter(characterId:string)
-  {
+  GetComicsByCharacter(characterId: string) {
     console.log(characterId);
-    this.service.GetComicsByCharacter(characterId).subscribe((result)=>{
-
-      if(result.data.count>0)
-      {
+    this.service.GetComicsByCharacter(characterId).subscribe((result) => {
+      if (result.data.count > 0) {
         this.comics = result.data.results;
         this.showComicsDiv = true;
       }
-    })
+    });
   }
 
-
+  /*
   GetSeriesByCharacter(characterId:string)
   {
     console.log(characterId);
-    this.service.GetSeriesByCharacter(characterId).subscribe((result)=>{
+    this.service.GetSeriesByCharacterId(characterId).subscribe((result)=>{
 
       if(result.data.count>0)
       {
@@ -93,6 +80,5 @@ export class CharactersComponent implements OnInit {
         this.showComicsDiv = true;
       }
     })
-  }
-
+  }*/
 }
