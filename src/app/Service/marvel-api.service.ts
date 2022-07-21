@@ -63,7 +63,6 @@ export class MarvelAPIService {
     }
 
    /*-----------------------------------------------------
-
     GetComicsByCharacter(characterId:string):Observable<any>
     {
       const comicsByCharacterUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;

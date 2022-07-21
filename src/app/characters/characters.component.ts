@@ -7,7 +7,7 @@ import { MarvelAPIService } from '../Service/marvel-api.service';
 })
 export class CharactersComponent implements OnInit {
   constructor(private service: MarvelAPIService) {
-    
+
   }
 
   characters: any = [];
