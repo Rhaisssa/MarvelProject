@@ -19,8 +19,11 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "angular-social-login": "^4.1.0",
+    "bootstrap": "^5.2.0",
+    "jquery": "^3.4.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "with": "^7.0.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

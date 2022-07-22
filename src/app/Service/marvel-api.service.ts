@@ -46,7 +46,7 @@ export class MarvelAPIService {
 
     /*-----------------------------------------------------*/
 
-    GetCharacterByCharacterId(characterId : number):Observable<any>
+    GetCharacterByCharacterId(characterId : string):Observable<any>
     {
       const characterByCharacterId = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/characters?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`
       return this.http.get(characterByCharacterId);
@@ -55,14 +55,24 @@ export class MarvelAPIService {
 
     /*-----------------------------------------------------*/
 
-    GetCharacterBySeriesId(seriesId : number):Observable<any>
+    GetCharacterBySeriesId(seriesId : string):Observable<any>
     {
       const characterBySeriesId = `https://gateway.marvel.com:443/v1/public/series/${seriesId}/characters?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`
       return this.http.get(characterBySeriesId);
 
     }
 
+   /*-----------------------------------------------------*/
+
+    GetCharacterByName(characterName : string):Observable<any>
+    {
+      const characterByNameUrl  = `https://gateway.marvel.com:443/v1/public/characters?name=$${characterName}&ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`
+      return this.http.get(characterByNameUrl);
+
+    }
+
    /*-----------------------------------------------------
+
     GetComicsByCharacter(characterId:string):Observable<any>
     {
       const comicsByCharacterUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?ts=1&apikey=55ea393c1ffa2d68b8d0681f7a613471&hash=9f1a0f5df8e037ee673c696423fecb64`;

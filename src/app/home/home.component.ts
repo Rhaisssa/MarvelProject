@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MarvelAPIService } from '../Service/marvel-api.service';
-
 @Component({
-  selector: 'app-home',
+  selector: 'cf-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

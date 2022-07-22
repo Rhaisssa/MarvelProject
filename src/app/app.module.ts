@@ -8,30 +8,26 @@ import { SeriesComponent } from './series/series.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatorsComponent } from './creators/creators.component';
 import { HomeComponent } from './home/home.component';
+import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { Routes } from '@angular/router';
-
-const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: '', component: CharactersComponent },
-  { path: 'comics', component: ComicsComponent },
-  { path: 'creators', component: CreatorsComponent },
-  { path: 'series', component: SeriesComponent },
-];
 
 @NgModule({
   declarations: [
+    LoginComponent,
     AppComponent,
     CharactersComponent,
     ComicsComponent,
     SeriesComponent,
     CreatorsComponent,
-    HomeComponent,
-    LoginComponent,
+    HomeComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
+    ],
+ providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
