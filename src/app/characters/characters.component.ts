@@ -46,7 +46,7 @@ export class CharactersComponent implements OnInit {
 
   }
 
-  getCharactersByCharacter(characterId: any) {
+  getCharactersByCharacterId(characterId: any) {
     console.log(characterId);
     this.service.GetCharacterByCharacterId(characterId).subscribe((result) => {
       if (result.data.count > 0) {

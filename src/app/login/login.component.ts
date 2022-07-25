@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SignInData } from '../model/signInData';
 import { AuthenticationService } from '../Service/authentication/authentication.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'cf-login',
@@ -38,4 +39,5 @@ export class LoginComponent implements OnInit {
       this.credentialsInvalid = true;
     }
   }
+
 }
