@@ -1,7 +1,18 @@
 <div class="container-fluid mt-5">
-  <h4>Marvel Creators</h4>
+  <h4>Marvel Events</h4>
+  <form class="form-inline my-2 my-lg-0">
+  <input
+    class="form-control mr-sm-2"
+    type="text"
+    placeholder="Search"
+    aria-label="Search"
+  />
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+    Search
+  </button>
+</form>
   <div class="row">
-    <div class="col-lg-3 mt-3 mb-3" *ngFor="let c of creators">
+    <div class="col-lg-3 mt-3 mb-3" *ngFor="let c of events">
       <div class="card">
         <img
           src="{{
@@ -18,3 +29,4 @@
     </div>
   </div>
 </div>
+

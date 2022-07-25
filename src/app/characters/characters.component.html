@@ -4,29 +4,22 @@
     <div class="col-lg-3">
       <input
         class="form-control mr-sm-2"
-        type="number"
+        type="text"
         required
-        name="characterSeriesId"
-        id="characterSeriesId"
+        name="characterName"
+        id="characterName"
         placeholder="Search"
         aria-label="Search"
-        (keyup)="GetCharacterBySeriesId($event)"
-        type="number"
-        required
-        name="charactersCharacterId"
-        id="charactersCharacterId"
-        placeholder="Search"
-        aria-label="Search"
-        (keyup)="GetCharacterByCharacterId($event)"
+        (keyup)="findCharacterName($event)"
       />
     </div>
     <div class="col-lg-3"></div>
   </div>
 </div>
 
-<!--------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------->
 
-<div class="container-fluid mt-5" *ngIf="!showSearchResultCharacter">
+<div class="container-fluid mt-5" *ngIf="!showCharacterName">
   <h4>Marvel Characters</h4>
   <div class="row">
     <div class="col-lg-3 mt-3 mb-3" *ngFor="let characters of characters">
@@ -39,39 +32,272 @@
           }}"
           width="100%"
           class="card-img-top"
-          alt="We encountered a problem uploading your image..."
-        />
-        <h5 class="card-title">{{ characters.name }}</h5>
-      <!---  <h6 class="card-title">{{ characters.id }}</h6> --->
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--------------------------------------------------------------------------->
-
-<div class="container-fluid mt-5" *ngIf="showSearchResultSeries">
-  <h4>Marvel Series</h4>
-  <div class="row">
-    <div class="col-lg-3 mt-3 mb-3" *ngFor="let series of findSeries">
-      <div class="card">
-        <img
-          src="{{
-            series.thumbnail.path +
-              '/standard_medium.' +
-              series.thumbnail.extension
-          }}"
-          width="100%"
-          class="card-img-top"
-          alt="We encountered a problem uploading your image..."
+          alt="Some Issue Loading Image..."
         />
         <div class="card-body">
-        <h5 class="card-title">{{ series.name }}</h5>
-        <!---- <h6 class="card-title">{{ series.id }}</h6> ---->
+          <h5 class="card-title">{{ characters.name }}</h5>
+          <h5 class="card-title">{{ characters.id }}</h5>
+
+          <button
+            type="button"
+            (click)="GetComicsByCharacter(characters.id)"
+            class="btn btn-dark mr-4"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+          >
+            Comics
+          </button>
+          <button
+            type="button"
+            (click)="GetEventsByCharacterId(characters.id)"
+            class="btn btn-dark mr-4"
+            data-toggle="modal"
+            data-target=".ed-example-modal-lg"
+          >
+            Events
+          </button>
+          <button
+            type="button"
+            (click)="GetSeriesByCharacter(characters.id)"
+            class="btn btn-dark mr-4"
+            data-toggle="modal"
+            data-target=".cd-example-modal-lg"
+          >
+            Series
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!----------------------------------------------------------------------------------------------->
+
+<div class="container-fluid mt-5" *ngIf="showCharacterName">
+  <h4>Marvel Characters</h4>
+  <div class="row">
+    <div class="col-lg-3 mt-3 mb-3" *ngFor="let characters of findedCharacter">
+      <div class="card">
+        <img
+          src="{{
+            characters.thumbnail.path +
+              '/standard_medium.' +
+              characters.thumbnail.extension
+          }}"
+          width="100%"
+          class="card-img-top"
+          alt="Some Issue Loading Image..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ characters.name }}</h5>
+          <h5 class="card-title">{{ characters.id }}</h5>
+          <button
+            type="button"
+            (click)="GetComicsByCharacter(characters.id)"
+            class="btn btn-dark mr-4"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+          >
+            Comics
+          </button>
+          <button
+            type="button"
+            (click)="GetEventsByCharacterId(characters.id)"
+            class="btn btn-dark mr-4"
+            data-toggle="modal"
+            data-target=".ed-example-modal-lg"
+          >
+            Events
+          </button>
+          <button
+            type="button"
+            (click)="GetSeriesByCharacter(characters.id)"
+            class="btn btn-dark mr-4"
+            data-toggle="modal"
+            data-target=".cd-example-modal-lg"
+          >
+            Series
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------------------------------->
+
+<div
+  class="modal fade bd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Comics</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row" *ngIf="showComics">
+            <div class="col-lg-3 mt-3 mb-3" *ngFor="let comics of comics">
+              <div class="card">
+                <img
+                  src="{{
+                    comics.thumbnail.path +
+                      '/standard_medium.' +
+                      comics.thumbnail.extension
+                  }}"
+                  width="100%"
+                  class="card-img-top"
+                  alt="Some Issue Loading Image..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ comics.title }}</h5>
+                  <h5 class="card-title">{{ comics.id }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!showComics">
+            <h4>There are no Comics For this Character</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------------------------------->
+
+<div
+  class="modal fade cd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Series</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row" *ngIf="showSeries">
+            <div class="col-lg-3 mt-3 mb-3" *ngFor="let series of series">
+              <div class="card">
+                <img
+                  src="{{
+                    series.thumbnail.path +
+                      '/standard_medium.' +
+                      series.thumbnail.extension
+                  }}"
+                  width="100%"
+                  class="card-img-top"
+                  alt="Some Issue Loading Image..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ series.title }}</h5>
+                  <h5 class="card-title">{{ series.id }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!showSeries">
+            <h4>There are no Series For this Character</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------------------------------->
+
+<div
+  class="modal fade ed-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Events</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row" *ngIf="showEvents">
+            <div class="col-lg-3 mt-3 mb-3" *ngFor="let events of events">
+              <div class="card">
+                <img
+                  src="{{
+                    events.thumbnail.path +
+                      '/standard_medium.' +
+                      events.thumbnail.extension
+                  }}"
+                  width="100%"
+                  class="card-img-top"
+                  alt="Some Issue Loading Image..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ events.title }}</h5>
+                  <h5 class="card-title">{{ events.id }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!showEvents">
+            <h4>There are no Events For this Character</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 

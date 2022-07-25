@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CharactersComponent } from './characters/characters.component';
 import { ComicsComponent } from './comics/comics.component';
-import { CreatorsComponent } from './creators/creators.component';
+import { EventsComponent } from './Events/Events.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './protector/auth.guard';
@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'characters', component: CharactersComponent},
   { path: 'comics', component: ComicsComponent},
-  { path: 'creators', component: CreatorsComponent},
+  { path: 'Events', component: EventsComponent},
   { path: 'series', component: SeriesComponent},
 ];
 
