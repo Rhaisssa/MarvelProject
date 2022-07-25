@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { ComicsComponent } from './comics/comics.component';
 import { SeriesComponent } from './series/series.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CreatorsComponent } from './creators/creators.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { EventsComponent } from './Events/Events.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { LoginComponent } from './login/login.component';
     CharactersComponent,
     ComicsComponent,
     SeriesComponent,
-    CreatorsComponent,
+    EventsComponent,
     HomeComponent
   ],
   imports: [

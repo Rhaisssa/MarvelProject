@@ -6,108 +6,83 @@ import { MarvelAPIService } from '../Service/marvel-api.service';
   styleUrls: ['./characters.component.css'],
 })
 export class CharactersComponent implements OnInit {
-  constructor(private service: MarvelAPIService) {
-  }
+  constructor(private service: MarvelAPIService) {}
 
   characters: any = [];
-  series: any = [];
   comics: any = [];
-  creators: any = [];
-  findCharacters: any = [];
-  findSeries: any = [];
-  findCharactersName: any = [];
-  charactersName: any = [];
-  showSearchResultCharacter: boolean = false;
-  showSearchResultSeries: boolean = false;
-  showSearchResultComics: boolean = false;
-  showSearchResultCreators: boolean = false;
-  showSearchResultName: boolean = false;
-  charactersSeriesId: any;
-  charactersCharacterId: any;
-
+  series: any = [];
+  events: any = [];
+  showComics: boolean = false;
+  showSeries: boolean = false;
+  showEvents: boolean = false;
+  characterName!: string;
+  characterId: any;
+  showCharacterName: boolean = false;
+  showCharacterId: boolean = false;
+  findedCharacter: any = [];
 
   ngOnInit(): void {
-
-    this.showSearchResultCharacter = false;
+    this.showComics = false;
+    this.showSeries = false;
+    this.showCharacterName = false;
     this.service.GetAllCharacters().subscribe((result) => {
       console.log(result);
-    this.characters = result.data.results;
+      this.characters = result.data.results;
     });
+  }
 
-    this.showSearchResultSeries = false;
-    this.service.GetAllSeries().subscribe((result) =>{
+  findCharacterName(event: any) {
+    this.characterName = event.target.value;
+    console.log(this.characterName);
+    this.service.GetCharacterByName(this.characterName).subscribe((result) => {
       console.log(result);
-      this.series = result.data.results;
-    });
-
-    this.showSearchResultName = false;
-    this.service.GetCharacterByName(this.charactersName).subscribe((result) =>{
-      console.log(result);
-      this.charactersName = result.data.results;
-    });
-
-    this.showSearchResultComics = false;
-    this.service.GetAllComics().subscribe((result) =>{
-      console.log(result);
-      this.comics = result.data.results;
-    });
-
-    this.showSearchResultCreators = false;
-    this.service.GetAllCreators().subscribe((result) =>{
-      console.log(result);
-      this.creators = result.data.results;
+      if (result.data.count > 0) {
+        this.showCharacterName = true;
+        this.findedCharacter = result.data.results;
+      } else {
+        this.ngOnInit();
+      }
     });
 
   }
 
-   GetCharacterByCharacterId(event: any) {
-    this.charactersCharacterId = event.target.value;
-    console.log(this.charactersCharacterId);
-    this.service
-      .GetCharacterBySeriesId(this.charactersCharacterId)
-      .subscribe((result) => {
-        console.log(result);
-
-        if (result.data.count > 0) {
-          this.showSearchResultCharacter = true;
-          this.findCharacters = result.data.results;
-        } else {
-          this.ngOnInit();
-        }
-      });
+  getCharactersByCharacter(characterId: any) {
+    console.log(characterId);
+    this.service.GetCharacterByCharacterId(characterId).subscribe((result) => {
+      if (result.data.count > 0) {
+        this.characterId = result.data.results;
+        this.showCharacterId = true;
+      }
+    });
   }
 
-  GetCharacterBySeriesId(event: any) {
-    this.charactersSeriesId = event.target.value;
-    console.log(this.charactersSeriesId);
-    this.service
-      .GetCharacterBySeriesId(this.charactersSeriesId)
-      .subscribe((result) => {
-        console.log(result);
-
-        if (result.data.count > 0) {
-          this.showSearchResultSeries = true;
-          this.findSeries = result.data.results;
-        } else {
-          this.ngOnInit();
-        }
-      });
+  GetComicsByCharacter(characterId: string) {
+    console.log(characterId);
+    this.service.GetComicsByCharacter(characterId).subscribe((result) => {
+      if (result.data.count > 0) {
+        this.comics = result.data.results;
+        this.showComics = true;
+      }
+    });
   }
 
-  /*GetCharacterByName(event: any) {
-    this.charactersName = event.target.value;
-    console.log(this.charactersName);
-    this.service
-      .GetCharacterByName(this.charactersName)
-      .subscribe((result) => {
-        console.log(result);
+  GetSeriesByCharacter(characterId: string) {
+    console.log(characterId);
+    this.service.GetSeriesByCharacter(characterId).subscribe((result) => {
+      if (result.data.count > 0) {
+        this.series = result.data.results;
+        this.showSeries = true;
+      }
+    });
+  }
 
-        if (result.data.count > 0) {
-          this.showSearchResultName = true;
-          this.findCharactersName = result.data.results;
-        } else {
-          this.ngOnInit();
-        }
-      });
-  }*/
+  GetEventsByCharacterId(characterId: string) {
+    console.log(characterId);
+    this.service.GetEventsByCharacterId(characterId).subscribe((result) => {
+      if (result.data.count > 0) {
+        this.events = result.data.results;
+        this.showEvents = true;
+      }
+    });
+  }
 }
